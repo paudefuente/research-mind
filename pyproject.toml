@@ -1,25 +1,21 @@
-
 [build-system]
 requires = [
-    "setuptools", 
-    "wheel",
-
+    "setuptools",
+    "wheel"
 ]
-buiild-backend = "setuptools.build_meta"
-
-[tool.setuptools.build_meta]
-requires = ["setuptools",]
+build-backend = "setuptools.build_meta"
 
 [project]
 name = "Resmind"
 version = "0.1.0"
-descripton = "Resmind is a library developed in response to the necesity of automating a range of processes associated with research across the field of computer science."
-authors = [{user = "paudefuente", name = "Pau Fuente", email = "paudefuente@gmail.com"},]
+description = "Resmind is a library developed in response to the necessity of automating a range of processes associated with research across the field of computer science."
+authors = [
+    { name = "paudefuente / Pau Fuente", email = "paudefuente@gmail.com" }
+]
 readme = "README.md"
-license = "MIT"
-required-python = ">=3.11"
+license = { file = "LICENSE" }
+requires-python = ">=3.11"
 dependencies = [
-    "asttokens==2.4.1",
     "certifi==2024.8.30",
     "charset-normalizer==3.4.0",
     "colorama==0.4.6",
@@ -56,6 +52,5 @@ dependencies = [
     "tzdata==2024.2",
     "urllib3==2.2.3",
     "wcwidth==0.2.13",
-  "scholarly",
+    "scholarly"
 ]
-

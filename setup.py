@@ -1,11 +1,12 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="resmin",
+    name="resmind",
     version="0.1.0",
     description="A library with utilities for researchers.",
     author="paudefuente - Pau Fuente",
-    packages=[
+    packages=find_packages(),  # Busca automáticamente los paquetes en tu proyecto.
+    install_requires=[
         "asttokens==2.4.1",
         "certifi==2024.8.30",
         "charset-normalizer==3.4.0",
@@ -44,7 +45,6 @@ setup(
         "urllib3==2.2.3",
         "wcwidth==0.2.13",
         "scholarly",
-        "setuptools",
     ],
     python_requires=">=3.11",
-)  
+)

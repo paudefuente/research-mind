@@ -14,7 +14,7 @@ from pathlib import Path
 import pandas as pd
 from scholarly import scholarly as scho
 
-from ..query_generator import SearchService
+from query_generator import SearchService
 
 
 class ScrapperService:

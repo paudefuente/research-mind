@@ -3,7 +3,9 @@ This module contains the command line interface for the application. Each comman
 is defined as a function that is called when the command is executed in the terminal,
 enabling interactuate with the library in a more user-friendly way.
 
-author: @paudefuente
+authors = [
+    "@paudefuente",
+]
 """
 
 

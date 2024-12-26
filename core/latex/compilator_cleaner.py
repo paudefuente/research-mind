@@ -4,6 +4,10 @@ in the main.py file, in which the user can choose to clean the files or not.
 
 The function will take all the file extensions that defined in .gitignore file and ignored by the git, and will remove them
 from the directory. 
+
+authors = [
+    "@paudefuente",
+]
 """
 
 import subprocess

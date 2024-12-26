@@ -2,6 +2,10 @@
 This script defines a scapper service that utilises the `scholarly` library that
 enables to search for articles in Google Scholar. The script defines a class
 which will locate all the functions that are necessary to search for articles.
+
+authors = [
+    "@paudefuente",
+]
 """
 
 # Packages to import

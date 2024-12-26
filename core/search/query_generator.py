@@ -1,6 +1,10 @@
 """
 This script will create request to a LM Studio API to get search queries based on key-terms passed 
 as arguments. 
+
+authors = [
+    "@paudefuente",
+]
 """
 
 # Packages to import

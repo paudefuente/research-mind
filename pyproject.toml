@@ -3,10 +3,10 @@ name = "resmind"
 version = "0.1.1"
 description = "Resmind is a library developed in response to the necessity of automating a range of processes associated with research across the field of computer science."
 authors = [
-    "paudefuente <paudefuente@gmail.com>",
+    "paudefuente",
 ]
 maintainers = [
-    "paudefuente <paudefuente@gmail.com>",
+    "paudefuente",
 ]
 readme = ["README.md", "docs/FILES.md", "docs/INSTALL.md", "docs/USAGE.md", "docs/CONTRIBUTING.md", "docs/CHANGELOG.md", "docs/LATEX.md"]
 license = "MIT"

@@ -18,7 +18,7 @@ from pathlib import Path
 import pandas as pd
 from scholarly import scholarly as scho
 
-from query_generator import SearchService
+from .query_generator import QueryGenerator
 
 
 class ScrapperService:
@@ -147,7 +147,6 @@ def main(func: str, origin_pth: Path | str, target_pth: Path | str) -> None:
     """
     # Create the object of the class
     scrapper_service = ScrapperService()
-    search_service = SearchService()
 
     # Get the total of studies by search
     for x in range(1, 2):
@@ -180,9 +179,8 @@ def main(func: str, origin_pth: Path | str, target_pth: Path | str) -> None:
                     logging.error("There are no queries defined in the queries.csv file.")
                     exit(1)
 
-                response = scrapper_service.check_all_queries(SearchService.TRIAL_SEARCHES_QUERIES_FOLDER)
+                response = scrapper_service.check_all_queries(ScrapperService.TRIAL_SEARCHES_QUERIES_FOLDER)
                 return response
-
 
             case _:
                 logging.error("The function that you informed is not valid.")

@@ -313,7 +313,7 @@ class QueryGenerator:
                 basic_structure["data"].append(new_concept)
 
             # Create or overwriter JSON file
-            path_file = f"{SearchService.JSON_FOLDER_PATH}/separated_keyterms.json"
+            path_file = f"{QueryGenerator.JSON_FOLDER_PATH}/separated_keyterms.json"
             with open(path_file, "w") as file:
                 json.dump(basic_structure, file, indent=4)
 

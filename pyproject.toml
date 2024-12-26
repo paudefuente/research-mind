@@ -6,11 +6,11 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "Resmind"
+name = "resmind"
 version = "0.1.0"
 description = "Resmind is a library developed in response to the necessity of automating a range of processes associated with research across the field of computer science."
 authors = [
-    { name = "paudefuente / Pau Fuente", email = "paudefuente@gmail.com" }
+    { name = "paudefuente - Pau Fuente", email = "paudefuente@gmail.com" }
 ]
 readme = "README.md"
 license = { file = "LICENSE" }

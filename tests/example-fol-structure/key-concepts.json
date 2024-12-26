@@ -1,0 +1,47 @@
+{
+    "_comment": "This is the key concepts file",
+    "key-concepts": [
+        {
+            "id": "1",
+            "importance": "1",
+            "concept": "Blockchain Enviroments",
+            "overview": "Blockchain environments are the systems in which we want to improve the computational power, researching and reviewing about previous research in this field."
+        },
+        {
+            "id": "2",
+            "importance": "2",
+            "concept": "Limitations of Blockchain Technology (Computation and Isolation)",
+            "overview": "The research question address this problem directly since we are proposing the computational oracles or DONs as the solution to these problems. We will talk about 'Cost Efficiency' and 'Latency'"
+        },
+        {
+            "id": "3",
+            "importance": "2",
+            "concept": "Connection between On-chain and Off-chain environments",
+            "overview": "The connection between on-chain and off-chain environments is the consequence of resolving the blockchain isolation problem. This will enable to use real-time data into blockchain systems, being able to propose systems taking advantage of the benefits of both worlds. This key concept highlight two issues: 'Data Standardisation and Interoperability', about how the data is transferred and processed between environments, and 'Protocols for Off-chain Communications', taking into account specific solutions as Chainlink or API gateways."
+        },
+        {
+            "id": "4",
+            "importance": "1",
+            "concept": "Computational Oracles and DONs",
+            "overview": "The oracles are the intermediaries between the on-chain and off-chain environments, acting as bridges between these two worlds. In this research, it is investigated how these elements can be used computationally, in order to use advanced technologies in a decentralised manner."
+        },
+        {
+            "id": "5",
+            "importance": "2",
+            "concept": "Computational Intensive Operations (Services) or Advanced Technologies",
+            "overview": "The operations or technologies to be conducted by the oracles in order to being able to apply them directly to the blockchain, taking advantage of the benefits of both technologies or capacities. e considered AI as the main operation or technology to be applied, but there are more examples, such as 'Big Data Analysis', '3D Rendering', 'Genomic Computation', 'Quantum Computation'."
+        },
+        {
+            "id": "6",
+            "importance": "3",
+            "concept": "Security and Decentralisation",
+            "overview": "Concepts that can be considered as key-concepts. Security involves all the security protocols, strategies or techniques used to ensure the security within the system. Cryptography methods plays a pivotal role in this field."
+        },
+        {
+            "id": "7",
+            "importance": "3",
+            "concept": "Efficiency in Data Transmission*",
+            "overview": "The efficiency in data transmission is fundamental for the approach adopted by the research, due to the need for fast, secure and low cost communication between the oracles and the blockchain. The concept can be divided in several technical elements, highlighting the following as the main ones: Network Bandwidth Usage, Compression Techniques, and Optimised Consensus Mechanisms."
+        }
+    ]
+}

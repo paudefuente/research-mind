@@ -1,0 +1,614 @@
+{
+    "_comment": "This is the key terms file",
+    "keyterms": [
+        {
+            "concept": "1",
+            "keyterm": "blockchain",
+            "thesaurus": []
+        },
+        {
+            "concept": "1",
+            "keyterm": "Distributed Ledger Technology",
+            "abbrev": "DLT",
+            "thesaurus": []
+        },
+        {
+            "concept": "1",
+            "keyterm": "ledger",
+            "thesaurus": [
+                "journal",
+                "register"
+            ]
+        },
+        {
+            "concept": "1",
+            "keyterm": "blockchain network",
+            "thesaurus": []
+        },
+        {
+            "concept": "1",
+            "keyterm": "blockchain ecosystem",
+            "thesaurus": []
+        },
+        {
+            "concept": "1",
+            "keyterm": "on-chain",
+            "thesaurus": []
+        },
+        {
+            "concept": "1",
+            "keyterm": "decentrali?ed network",
+            "thesaurus": []
+        },
+        {
+            "concept": "1",
+            "keyterm": "blockchain framework",
+            "thesaurus": []
+        },
+        {
+            "concept": "2",
+            "keyterm": "scalability",
+            "thesaurus": []
+        },
+        {
+            "concept": "2",
+            "keyterm": "blockchain isolation",
+            "keyterm_thesaurus": ["isolation"],
+            "thesaurus": [
+                "confinement",
+                "desolation",
+                "segregation",
+                "solitude",
+                "insularity",
+                "seclusion",
+                "separation",
+                "detachment"
+            ]
+        },
+        {
+            "concept": "2",
+            "keyterm": "latency issues",
+            "thesaurus": []
+        },
+        {
+            "concept": "2",
+            "keyterm": "cost efficiency",
+            "thesaurus": [
+                "profitable",
+                "economical",
+                "productive"
+            ]
+        },
+        {
+            "concept": "2",
+            "keyterm": "computation limitation",
+            "thesaurus": []
+        },
+        {
+            "concept": "2",
+            "keyterm": "throughput bottlenecks",
+            "keyterm_thesaurus": ["bottleneck"],
+            "thesaurus": [
+                "block",
+                "blockage",
+                "congestion",
+                "traffic jam"
+            ]
+        },
+        {
+            "concept": "2",
+            "keyterm": "on-chain scalability",
+            "thesaurus": []
+        },
+        {
+            "concept": "3",
+            "keyterm": "integration",
+            "thesaurus": [
+                "combination",
+                "mixture",
+                "union",
+                "fusion",
+                "merger"
+            ]
+        },
+        {
+            "concept": "3",
+            "keyterm": "on-chain off-chain",
+            "thesaurus": []
+        },
+        {
+            "concept": "3",
+            "keyterm": "interoperability",
+            "thesaurus": []
+        },
+        {
+            "concept": "3",
+            "keyterm": "off-chain protocols",
+            "thesaurus": []
+        },
+        {
+            "concept": "3",
+            "keyterm": "real-time data",
+            "keyterm_thesaurus": ["real-time", "data"],
+            "thesaurus_1": [
+                "live",
+                "actual" 
+            ], 
+            "thesaurus_2": [
+                "evidence",
+                "info",
+                "input",
+                "knowledge",
+                "details",
+                "facts"
+            ]
+        },
+        {
+            "concept": "3",
+            "keyterm": "hybrid systems",
+            "keyterm_thesaurus": ["hybrid", "systems"],
+            "thesaurus_ 1": [
+                "combination",
+                "cross",
+                "mixture"
+            ],
+            "thesaurus_ 2": [
+                "arrangement",
+                "organization",
+                "scheme",
+                "structure",
+                "rule"
+            ]
+        },
+        {
+            "concept": "3",
+            "keyterm": "data standardi?ation",
+            "keyterm_thesaurus": ["standardi?ation"],
+            "thesaurus": [
+                "similarity",
+                "likeness",
+                "resemblance"
+            ]
+        },
+        {
+            "concept": "3",
+            "keyterm": "cross-domain communication",
+            "keyterm_thesaurus": ["communication"],
+            "thesaurus": [
+                "contact",
+                "link",
+                "connection"
+            ]
+        },
+        {
+            "concept": "4",
+            "keyterm": "oracl*",
+            "thesaurus": []
+        },
+        {
+            "concept": "4",
+            "keyterm": "distributed oracle network",
+            "abbrev": "DON",
+            "keyterm_thesaurus": ["distributed", "network"],
+            "thesaurus_1": [
+                "dispersed",
+                "scattered",
+                "spread",
+                "diffused",
+                "shared"
+
+            ],
+            "thesaurus_2": [
+                "system",
+                "grid",
+                "net",
+                "chain"
+            ]
+        },
+        {
+            "concept": "4",
+            "keyterm": "oracle network",
+            "thesaurus": []
+        },
+        {
+            "concept": "4",
+            "keyterm": "oracle middleware",
+            "thesaurus": []
+        },
+        {
+            "concept": "4",
+            "keyterm": "computatio* oracle",
+            "thesaurus": []
+        },
+        {
+            "concept": "4",
+            "keyterm": "oracle-based system",
+            "thesaurus": []
+        },
+        {
+            "concept": "4",
+            "keyterm": "oracle consensus",
+            "keyterm_thesaurus": ["consensus"],
+            "thesaurus": [
+                "unanimity",
+                "unity",
+                "harmony",
+                "concord"
+            ]
+        },
+        {
+            "concept": "4",
+            "keyterm": "trustless bridge",
+            "keyterm_thesaurus": ["trustless", "bridge"],
+            "thesaurus_1": [
+                "arguable",
+                "debatable",
+                "improbable",
+                "problematic"
+            ],
+            "thesaurus_2": [
+                "overpass",
+                "span",
+                "link"
+            ]
+        },
+        {
+            "concept": "4",
+            "keyterm": "blockchain middleware",
+            "thesaurus": []
+        },
+        
+        {
+            "concept": "5",
+            "keyterm": "comput*",
+            "keyterm_thesaurus": ["computation", "computing"],
+            "thesaurus_1": [
+                "calculation",
+                "computing",
+                "assessment"
+            ],
+            "thesaurus_2": [
+                "calculation",
+                "counting",
+                "estimation"
+            ]
+        },
+        {
+            "concept": "5",
+            "keyterm": "advanced computation",
+            "thesaurus": []
+        },
+        {
+            "concept": "5",
+            "keyterm": "off-chain computation",
+            "thesaurus": []
+        },
+        {
+            "concept": "5",
+            "keyterm": "edge computing",
+            "keyterm_thesaurus": ["edge"],
+            "thesaurus": [
+                "boundary",
+                "fringe",
+                "margin",
+                "verge"
+            ]
+        },
+        {
+            "concept": "5",
+            "keyterm": "distributed comput*",
+            "thesaurus": []
+        },
+        {
+            "concept": "5",
+            "keyterm": "parallel computing",
+            "keyterm_thesaurus": ["parallel"],
+            "thesaurus": [
+                "alongside",
+                "coordinate",
+                "lateral"
+            ]
+        },
+        {
+            "concept": "5",
+            "keyterm": "intensive computation",
+            "keyterm_thesaurus": ["intensive"],
+            "thesaurus": [
+                "comprehensive",
+                "demanding",
+                "in-depth",
+                "thorough",
+                "exhaustive"
+            ]
+        },
+        {
+            "concept": "5",
+            "keyterm": "decentrali?ed computation",
+            "thesaurus": []
+        },
+        {
+            "concept": "5",
+            "keyterm": "AI computation",
+            "thesaurus": []
+        },
+        {
+            "concept": "6",
+            "keyterm": "artificial intelligence",
+            "abbrev": "AI",
+            "thesaurus": [
+                "robotics",
+                "expert system",
+                "intelligent retrieval",
+                "knowledge engineering"
+            ]
+        },
+        {
+            "concept": "6",
+            "keyterm": "machine learning",
+            "abbrev": "ML",
+            "thesaurus": []
+        },
+        {
+            "concept": "6",
+            "keyterm": "deep learning",
+            "abbrev": "DL",
+            "thesaurus": []
+        },
+        {
+            "concept": "6",
+            "keyterm": "federated learning",
+            "abbrev": "FL",
+            "thesaurus": []
+        },
+        {
+            "concept": "6",
+            "keyterm": "Big Data",
+            "thesaurus": []
+        },
+        {
+            "concept": "6",
+            "keyterm": "data processing",
+            "thesaurus": [
+                "clarification",
+                "cleaning",
+                "rectification"
+            ]
+        },
+        {
+            "concept": "6",
+            "keyterm": "quantum",
+            "thesaurus": []
+        },
+        {
+            "concept": "6",
+            "keyterm": "quantum computing",
+            "thesaurus": []
+        },
+        {
+            "concept": "6",
+            "keyterm": "Internet of Things",
+            "abbrev": "IoT",
+            "thesaurus": []
+        },
+        {
+            "concept": "6",
+            "keyterm": "Industrial Internet of Things",
+            "abbrev": "IIoT",
+            "thesaurus": []
+        },
+        {
+            "concept": "6",
+            "keyterm": "genomic computation",
+            "thesaurus": []
+        },
+        {
+            "concept": "6",
+            "keyterm": "image processing",
+            "thesaurus": []
+        },
+        {
+            "concept": "6",
+            "keyterm": "3D rendering",
+            "keyterm_thesaurus": ["rendering"],
+            "thesaurus": [
+                "translation",
+                "interpretation"
+            ]
+        },
+        {
+            "concept": "6",
+            "keyterm": "simulation systems",
+            "keyterm_thesaurus": ["simulation"],
+            "thesaurus": [
+                "replica",
+                "duplicate",
+                "facsimile"
+            ]
+        },
+        {
+            "concept": "7",
+            "keyterm": "security",
+            "thesaurus": [
+                "preservation",
+                "protection",
+                "surveillance",
+                "safeguard"
+            ]
+        },
+        {
+            "concept": "7",
+            "keyterm": "decentrali?ed",
+            "thesaurus": [
+                "dispersed",
+                "distributed",
+                "scattered",
+                "separated"
+            ]
+        },
+        {
+            "concept": "7",
+            "keyterm": "cryptography",
+            "thesaurus": [
+                "cipher"
+            ]
+        },
+        {
+            "concept": "7",
+            "keyterm": "secure data transmission",
+            "keyterm_thesaurus": ["secure", "transmission"],
+            "thesaurus_1": [
+                "protected",
+                "defended",
+                "fortify"
+            ],
+            "thesaurus_2": [
+                "communication",
+                "diffusion",
+                "transference"
+            ]
+        },
+        {
+            "concept": "7",
+            "keyterm": "secure protocol",
+            "keyterm_thesaurus": ["protocol"],
+            "thesaurus": [
+                "agreement",
+                "contract",
+                "pact"
+            ]
+        },
+        {
+            "concept": "7",
+            "keyterm": "trustless environment",
+            "keyterm_thesaurus": ["environment"],
+            "thesaurus": [
+                "setting",
+                "situation",
+                "status"
+            ]
+        },
+        {
+            "concept": "7",
+            "keyterm": "integrity",
+            "thesaurus": [
+                "honesty",
+                "principle",
+                "virtue"
+            ]
+        },
+        {
+            "concept": "7",
+            "keyterm": "privacy",
+            "thesaurus": [
+                "seclusion",
+                "isolation",
+                "privateness",
+                "retirement"
+            ]
+        },
+        {
+            "concept": "7",
+            "keyterm": "data verification",
+            "keyterm_thesaurus": ["verification"],
+            "thesaurus": [
+                "confirmation",
+                "authentication",
+                "evidence",
+                "proof"
+            ]
+        },
+        {
+            "concept": "7",
+            "keyterm": "blockchain consensus",
+            "thesaurus": []
+        },
+        {
+            "concept": "7",
+            "keyterm": "tamper-free",
+            "keyterm_thesaurus": ["tamper"],
+            "thesaurus": [
+                "meddle",
+                "tinker",
+                "alter",
+                "modify"
+            ]
+        },
+        {
+            "concept": "8",
+            "keyterm": "efficiency",
+            "thesaurus": [
+                "competence",
+                "skill",
+                "capability",
+                "productivity"
+            ]
+        },
+        {
+            "concept": "8",
+            "keyterm": "low-latency",
+            "keyterm_thesaurus": ["latency"],
+            "thesaurus": [
+                "discontinuation",
+                "inactivity",
+                "recess",
+                "remission",
+                "suspension",
+                "waiting"
+            ]
+        },
+        {
+            "concept": "8",
+            "keyterm": "high-performance",
+            "thesaurus": []
+        },
+        {
+            "concept": "8",
+            "keyterm": "data compression",
+            "keyterm_thesaurus": ["compression"],
+            "thesaurus": [
+                "squeezing",
+                "pressing",
+                "condensation",
+                "consolidation"
+            ]
+        },
+        {
+            "concept": "8",
+            "keyterm": "bandwidth",
+            "thesaurus": [
+                "transmission capacity",
+                "frequency"
+            ]
+        },
+        {
+            "concept": "8",
+            "keyterm": "bandwidth optimization",
+            "keyterm_thesaurus": ["optimization"],
+            "thesaurus": [
+                "boost",
+                "increment",
+                "expansion"
+            ]
+        },
+        {
+            "concept": "8",
+            "keyterm": "fast data transfer",
+            "thesaurus": []
+        },
+        {
+            "concept": "8",
+            "keyterm": "optimi?ed consensus",
+            "thesaurus": []
+        },
+        {
+            "concept": "8",
+            "keyterm": "secure communication",
+            "thesaurus": []
+        },
+        {
+            "concept": "8",
+            "keyterm": "data integrity",
+            "thesaurus": []
+        }
+    ]
+}

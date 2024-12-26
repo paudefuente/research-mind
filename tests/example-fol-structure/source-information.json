@@ -1,0 +1,125 @@
+{
+    "_comment": "This file contains the search rules for each of the source of information",
+    "sources": [
+        {
+            "source": "Google Scholar",
+            "url": "https://scholar.google.com/",
+            "data_coverage": "2008-present",
+            "rules": []
+        },
+        {
+            "source": "RefSeek",
+            "url": "https://www.refseek.com/",
+            "data_coverage": "2008-present",
+            "rules": []
+        },
+        {
+            "source": "Consensus",
+            "url": "https://www.consensus.app/",
+            "data_coverage": "2008-present",
+            "rules": []
+        },
+        {
+            "source": "Scopus",
+            "url": "https://www.scopus.com/home.uri",
+            "data_coverage": "2008-present",
+            "rules": []
+        },
+        {
+            "source": "IEEE Xplore",
+            "url": "https://ieeexplore.ieee.org/Xplore/home.jsp",
+            "data_coverage": "2008-present",
+            "rules": []
+        },
+        {
+            "source": "Directory of Open Access Journals",
+            "url": "https://doaj.org/",
+            "data_coverage": "2008-present",
+            "rules": []
+        },
+        {
+            "source": "ScienceDirect",
+            "url": "https://www.sciencedirect.com/",
+            "data_coverage": "2008-present",
+            "rules": []
+        },
+        {
+            "source": "ACM Digital Library",
+            "url": "https://dl.acm.org/",
+            "data_coverage": "2008-present",
+            "rules": []
+        },
+        {
+            "source": "Academia.edu",
+            "url": "https://www.academia.edu/",
+            "data_coverage": "2008-present",
+            "rules": []
+        },
+        {
+            "source": "ResearchGate",
+            "url": "https://www.researchgate.net/",
+            "data_coverage": "2008-present",
+            "rules": []
+        },
+        {
+            "source": "ProQuest Dissertations & Theses",
+            "url": "https://www.proquest.com/dissertations-theses.html",
+            "data_coverage": "2008-present",
+            "rules": []
+        },
+        {
+            "source": "Tesis Doctorales en Red",
+            "url": "https://www.tdx.cat/",
+            "data_coverage": "2008-present",
+            "rules": []
+        },
+        {
+            "source": "Dialnet",
+            "url": "https://dialnet.unirioja.es/",
+            "data_coverage": "2008-present",
+            "rules": []
+        },
+        {
+            "source": "OpenGrey",
+            "url": "http://www.opengrey.eu/",
+            "data_coverage": "2008-present",
+            "rules": []
+        },
+        {
+            "source": "arXiv",
+            "url": "https://arxiv.org/search/cs",
+            "data_coverage": "2008-present",
+            "rules": []
+        },
+        {
+            "source": "SSRN",
+            "url": "https://www.ssrn.com/index.cfm/en/",
+            "data_coverage": "2008-present",
+            "rules": []
+        },
+        {
+            "source": "TechRxiv",
+            "url": "https://www.techrxiv.org/",
+            "data_coverage": "2008-present",
+            "rules": []
+        },
+        {
+            "source": "IEEE Blockchain Conference",
+            "url": "https://blockchain.ieee.org/",
+            "data_coverage": "2008-present",
+            "rules": []
+        },
+        {
+            "source": "European Commission",
+            "url": "https://ec.europa.eu/info/index_en",
+            "data_coverage": "2008-present",
+            "rules": []
+        },
+        {
+            "source": "NIST",
+            "url": " https://www.nist.gov/",
+            "data_coverage": "2008-present",
+            "rules": []
+        }
+    ]
+}

@@ -1,0 +1,30 @@
+{
+    "_comment": "This file contains the search rules for the search engine",
+    "rules_search": [
+        {
+            "id": "1",
+            "rule": "boolean operators",
+            "description": "Use AND, OR, NOT to combine search terms. For example, term1 AND term2."
+        },
+        {
+            "id": "2",
+            "rule": "Wildcards",
+            "description": "Use * to replace any number of characters. For example, comput* will return computer, computing, computation, etc. Use ? to replace a single character. For example, decentrali?ed will return decentralized and decentralised."
+        },
+        {
+            "id": "3",
+            "rule": "Quotation marks",
+            "description": "Use quotation marks to search for an exact phrase. For example, \"decentralized oracles\" will return only results that contain this exact phrase."
+        },
+        {
+            "id": "4",
+            "rule": "Parentheses",
+            "description": "Use parentheses to group search terms. For example, (decentralized oracles) AND (blockchain) will return results that contain the word blockchain and either decentralized oracles or decentralized oracles."
+        },
+        {
+            "id": "5",
+            "rule": "Field search",
+            "description": "Use field search to search for terms in specific fields. For example, author:Smith will return results that contain the word Smith in the author field."
+        }
+    ]
+}

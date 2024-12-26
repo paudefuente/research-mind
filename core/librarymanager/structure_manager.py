@@ -15,7 +15,7 @@ import logging
 from pathlib import Path
 
 
-class StructureGenerator:
+class StructureManager:
     """
     StructureGenerator will manage the structure initial which will serve as the
     base for the library. This structure will be used to store the different types
@@ -36,7 +36,15 @@ class StructureGenerator:
 
         self.ROOT_PATH = project_root
 
-    def create_structure(self, project_path: Path | str = None) -> bool:
+        self.basic_structure = [
+            'json/def',
+            'json/def-processed',
+            'json/trial-searches/que-gen-combinations',
+            'json/trial-searches/que-results',
+            'csv/',
+        ]
+
+    def generate_structure(self, project_path: Path | str = None) -> bool:
         """
         Creates the basic structure of folders that will be used to store the
         different types of files that are necessary for the library to work.
@@ -54,14 +62,14 @@ class StructureGenerator:
             project_path = Path(project_path)
 
         if not project_path.exists():
-            raise self.log.error(f"[StructureGenerator] Path {project_path} does not exist.")
+            raise self.log.error(f"[StructureManager] Path {project_path} does not exist.")
 
         # Create the structure
         self.log.info("Creating the structure of folders.")
         response = self.create_folders(project_path)
         return response
     
-    def create_folders(self, project_path: Path) -> bool:
+    def generate_folders(self, project_path: Path) -> bool:
         """
         Creates the folders for the basic structure of the library.
 
@@ -69,28 +77,30 @@ class StructureGenerator:
         :return: boolean indicating if the structure was created successfully.
         """
         try:
-            # Basic Structure (systematic-review)
-            structure = [
-                'json/def',
-                'json/def-processed',
-                'json/que-gen-combinations',
-                'json/que-results',
-                'csv/',
-            ]
-
-            # Create the folders
-            for folder in structure:
+            
+            basic_structure = self.basic_structure if self.basic_structure else []
+            for folder in basic_structure:
                 folder_path = Path(project_path / folder)
                 folder_path.mkdir(parents=True, exist_ok=True)
 
-                # .gitkeep file
-                gitkeep_path = folder_path / ".gitkeep"
-                if not gitkeep_path.exists():
-                    gitkeep_path.touch()
+                # .gitkeep file if the folder is empty
+                if not any(folder_path.iterdir()):
+                    gitkeep_path = folder_path / ".gitkeep"
+                    if not gitkeep_path.exists():
+                        gitkeep_path.touch()
                 
-            self.log.info("[StructureGenerator] Structure of folders created successfully.")
+            self.log.info("[StructureManager] Structure of folders created successfully.")
             return True
         except Exception as e:
-            self.log.error(f"[StructureGenerator] Error while creating the structure of folders: {e}")
+            self.log.error(f"[StructureManager] Error while creating the structure of folders: {e}")
             return False
-        
+    
+
+    def check_structure(self, project_path: Path | str = None) -> bool:
+        """
+        Checks if there is any kind of fixed structure in the project_path, 
+        enabling the library to work properly.
+
+        :param project_path: The path of the project where the structure will be checked.
+        :return: boolean indicating if the structure is correct or exists.
+        """

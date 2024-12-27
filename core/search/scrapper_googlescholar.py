@@ -18,7 +18,8 @@ from pathlib import Path
 import pandas as pd
 from scholarly import scholarly as scho
 
-from .query_generator import QueryGenerator
+from core.search.query_manager import QueryGenerator
+from core.librarymanager.structure_manager import StructureManager
 
 
 class ScrapperService:
@@ -36,76 +37,94 @@ class ScrapperService:
         logging.basicConfig(level=logging.INFO)
         self.log = logging.getLogger(__name__)
 
+        structureManager = StructureManager()
+        self.LIBRARY_FOLDER_PATH = Path(structureManager.ROOT_PATH).joinpath("resmi_folders/json")
 
-    def create_results_folder(self, folder_path: Path | str, importance: str) -> str:
+
+    def init_results(self, origin_path: any) -> str | Path:
         """
-        Creates a folder to store the results of the search queries.
+        Creates a basic file 
 
         :param folder_path: The path of the folder that will be created.
         :return: bool
         """
+        if not isinstance(origin_path, Path):
+            origin_path = Path(origin_path)
 
-        if isinstance(folder_path, Path):
-            folder_path.mkdir(parents=True, exist_ok=True) if not folder_path.exists() else None
-            folder_path.joinpath(f"results_imp{importance}.json")
-        
-        if isinstance(folder_path, str):
-            folder_path = Path(folder_path)
-            folder_path.mkdir(parents=True, exist_ok=True) if not folder_path.exists() else None
-            folder_path.joinpath(f"results_imp{importance}.json")
+        with open(origin_path, "r") as file:
+            data = json.load(file)
+
+        origin_importance = data.get("info", [])
+        if origin_importance:
+            origin_importance = origin_importance[0].get("importance")
+        else:
+            origin_importance = None
+
+        total_combinations = len(data.get("data", []))
+        origin_name = os.path.basename(origin_path)
 
         results = {
                 "_comment": "This file contains the total of studies extracted of the corresponding importance.",
                 "info": {
-                    "importance": importance,
-                    "total_studies": sum(results.values())
+                    "importance": origin_importance,
+                    "total_combinations":total_combinations,
                 },
                 "data":[]
             }
-
-        with open(folder_path, "w") as file:
+        
+        results_path = self.LIBRARY_FOLDER_PATH.joinpath(f'trial-searches/que-results/imp{origin_importance}/results_{origin_name}.json')
+        with open(results_path, "w") as file:
             json.dump(results, file, indent=4)
 
-        return folder_path
+        return results_path
 
 
-    def check_all_queries(self, origin_pth: Path | str , target_pth) -> bool:
+    def get_results(self, origin_path: any) -> bool:
         """
         Gets all the files that are in the folder and checks if they have queries
         defined in them. If true, it will extract all the queries and process them,
         saving the total of studies found in another file.
+
+        :param origin_pth: The path of the folder where the queries are stored.
+        :param target_pth: The path of the folder where the results will be stored.
+        :return: True if the queries are defined correctly
         """
         
-        if not isinstance(origin_pth, Path):
-            origin_pth = Path(origin_pth)
+        if not isinstance(origin_path, Path):
+            origin_path = Path(origin_path)
 
-        if not origin_pth.exists():
-            self.log.error(f"The folder {origin_pth} does not exist.")
+        if not origin_path.exists():
+            self.log.error(f"The folder {origin_path} does not exist.")
             return False
-        
-        try:
-            # Create the results folder + add the results file
-            for num, file in enumerate(origin_pth.iterdir()):
-                results_folder = self.create_results_folder(target_pth, num)
 
+        try: 
+            for file in origin_path.iterdir():
                 if file.is_file() and file.suffix == ".json":
-                    with open(file) as file:
+
+                    results_path = self.init_results(file.absolute())
+
+                    with open(file, "r") as file:
                         data = json.load(file)
                     
                     queries = pd.Series(data.get("data"))
-                    results = self.check_queries(queries)
+                    results = self.search_queries(queries)
 
-                    data["data"] = results
+                    with open(results_path, "r") as file1:
+                        data = json.load(file1)
+                    
+                    data["data"] = []
+                    data["data"].extend(results)
 
-                    with open(results_folder, "w") as file:
-                        json.dump(data, file, indent=4)
+                    with open(results_path, "w") as file1:
+                        json.dump(data, file1, indent=4)
+
             return True
         except Exception as e:
             self.log.error(f"Error: {e}")
             return False
         
 
-    def check_queries(self, queries: pd.Series) -> dict:
+    def search_queries(self, queries: pd.Series) -> list:
         """
         Gets all the queries defined in a certain .json file, process them in
         order to get all the total results for each query and store them into
@@ -115,83 +134,81 @@ class ScrapperService:
         :return: True if the queries are defined correctly
         """
         try:
-            results = {}
+            results = []
             for num, query in enumerate(queries):
-                if num >= 3:
-                    break
-                
-                results[num] = self.count_studies_by_search(query)   
+                search = scho.search_pubs(query)
+                results.append({'ind':num, 'query':query, 'num_studies': search.total_results})
 
             if results:
                 return results
-            return {}
+            return []
         except Exception as e:
             self.log.error(f"Error: {e}")
-
-    
-    def count_studies_by_search(self, query: any) -> int:
-        """
-        Gets the total of studies that are found by a specific search query.
-
-        :param query: The query that will be used to search the studies.
-        :return: The total of studies that are found by the search query.
-        """ 
-        search_results = scho.search_pubs(query)
-        return search_results.total_results
-        
-                                
-
-def main(func: str, origin_pth: Path | str, target_pth: Path | str) -> None:
-    """
-    Main function to execute the script
-    """
-    # Create the object of the class
-    scrapper_service = ScrapperService()
-
-    # Get the total of studies by search
-    for x in range(1, 2):
-
-        origin_pth = origin_pth.joinpath(f"trial-search-queries-{x}.json")
-        with open(origin_pth) as file:
-            data = json.load(file)
-
-        queries = pd.Series(data.get("data"))
-        
-
-        response = scrapper_service.check_queries(queries)
-        scrapper_service.log.info(f"The total of studies found by the search query is: {response}")
-        print(f"The total of studies found by the search query is: {response}")
-    
-    try:
-        match(func):
-
-            case "create_results_folder":
-                origin_pth = Path(target_pth)
-                importance = "0"
-                response = scrapper_service.create_results_folder(origin_pth, importance)
-                return response
+            return []
 
 
-            case "check_all_queries":
 
-                total_query_files = os.listdir(origin_pth)
-                if total_query_files == 0:
-                    logging.error("There are no queries defined in the queries.csv file.")
-                    exit(1)
 
-                response = scrapper_service.check_all_queries(ScrapperService.TRIAL_SEARCHES_QUERIES_FOLDER)
-                return response
 
-            case _:
-                logging.error("The function that you informed is not valid.")
-                exit(1)
-    except Exception as e:
-        logging.error(f"Error: {e}")
-
-    
 
 
 
 if __name__ == "__main__":
-    # main()
-    pass
+    
+    scrapper_service = ScrapperService()
+
+    origin_path = "../../resmi_folders/json/trial-searches/que-gen-combinations/imp1"
+    scrapper_service.get_results(origin_path)
+
+
+
+
+                                
+
+# if __name__ == "__main__":
+#     """
+#     Main function to execute the script
+#     """
+#     # Create the object of the class
+#     scrapper_service = ScrapperService()
+
+#     # Get the total of studies by search
+#     for x in range(1, 2):
+
+#         origin_pth = origin_pth.joinpath(f"trial-search-queries-{x}.json")
+#         with open(origin_pth) as file:
+#             data = json.load(file)
+
+#         queries = pd.Series(data.get("data"))
+        
+
+#         response = scrapper_service.check_queries(queries)
+#         scrapper_service.log.info(f"The total of studies found by the search query is: {response}")
+#         print(f"The total of studies found by the search query is: {response}")
+    
+#     try:
+#         match(func):
+
+#             case "create_results_folder":
+#                 origin_pth = Path(target_pth)
+#                 importance = "0"
+#                 response = scrapper_service.create_results_folder(origin_pth, importance)
+#                 scrapper_service.log.info(f'[ScrapperService] The results folder was created successfully: {response}') 
+
+
+#             case "check_all_queries":
+
+#                 total_query_files = os.listdir(origin_pth)
+#                 if total_query_files == 0:
+#                     logging.error("There are no queries defined in the queries.csv file.")
+#                     exit(1)
+
+#                 response = scrapper_service.check_all_queries(ScrapperService.TRIAL_SEARCHES_QUERIES_FOLDER)
+#                 scrapper_service.log.info(f'[ScrapperService] The results folder was created successfully: {response}') 
+
+#             case _:
+#                 scrapper_service.log.error("The function that you informed is not valid.")
+#                 exit(1)
+#     except Exception as e:
+#         logging.error(f"Error: {e}")
+

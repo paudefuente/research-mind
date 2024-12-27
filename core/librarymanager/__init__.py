@@ -11,3 +11,5 @@ Authors = [
 
 from .structure_manager import StructureManager
 from .file_manager import FileManager
+
+__all__ = ['StructureManager', 'FileManager']

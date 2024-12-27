@@ -29,20 +29,34 @@ class StructureManager:
         logging.basicConfig(level=logging.INFO)     
         self.log = logging.getLogger(__name__)
 
+        self.ROOT_PATH = StructureManager.detect_root_path()
+        self.basic_structure = [
+            'resmi_folders/json/def',
+            'resmi_folders/json/def-processed',
+            'resmi_folders/json/trial-searches/que-gen-combinations',
+            'resmi_folders/json/trial-searches/que-results/imp1',
+            'resmi_folders/json/trial-searches/que-results/imp2',
+            'resmi_folders/json/trial-searches/que-results/imp3',
+            'resmi_folders/csv/',
+        ]
+
+    @staticmethod
+    def detect_root_path() -> Path:
+        """
+        Detects the root path of the project where the library is being used.
+        
+        :return: Path of the root directory of the project.
+        """
+        possible_root_opt = ['.git', 'pyproject.toml', 'setup.py', 'requirements.txt']
         current_dir = Path(__file__).resolve().parent
         project_root = current_dir
-        while not (project_root / ".git").exists() and not (project_root / 'pyproject.toml').exists():
+        while not any((project_root / opt).exists() for opt in possible_root_opt):
+            if project_root == project_root.parent:
+                raise logging.log.error("[StructureManager] Root path of the project could not be detected.")
             project_root = project_root.parent
 
-        self.ROOT_PATH = project_root
+        return project_root
 
-        self.basic_structure = [
-            'json/def',
-            'json/def-processed',
-            'json/trial-searches/que-gen-combinations',
-            'json/trial-searches/que-results',
-            'csv/',
-        ]
 
     def generate_structure(self, project_path: Path | str = None) -> bool:
         """
@@ -64,9 +78,9 @@ class StructureManager:
         if not project_path.exists():
             raise self.log.error(f"[StructureManager] Path {project_path} does not exist.")
 
-        # Create the structure
+        # Generate the structure
         self.log.info("Creating the structure of folders.")
-        response = self.create_folders(project_path)
+        response = self.generate_folders(project_path)
         return response
     
     def generate_folders(self, project_path: Path) -> bool:
@@ -104,3 +118,25 @@ class StructureManager:
         :param project_path: The path of the project where the structure will be checked.
         :return: boolean indicating if the structure is correct or exists.
         """
+
+
+    def total_files(self, project_path: Path | str = None) -> int:
+        """
+        Returns the total number of files located in a certain path.
+        
+        :param project_path: The path of the project where the structure will be checked.
+        :return: int with the total number of files in the path.
+        """
+        if project_path is None:
+            self.log.error("[StructureManager] Path of the project is not provided.")
+            return 0
+
+        if isinstance(project_path, str):
+            project_path = Path(project_path)
+
+        if not project_path.exists():
+            self.log.error(f"[StructureManager] Path {project_path} does not exist.")
+            return 0 
+        
+        total_files = sum(1 for _ in project_path.iterdir() if _.is_file())
+        return total_files

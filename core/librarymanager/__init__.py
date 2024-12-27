@@ -9,7 +9,8 @@ Authors = [
 ]
 """
 
-from .structure_manager import StructureManager
-from .file_manager import FileManager
+from core.librarymanager.structure_manager import StructureManager
+# from core.librarymanager.file_manager import FileManager
 
-__all__ = ['StructureManager', 'FileManager']
+# __all__ = ['StructureManager', 'FileManager']
+__all__ = ['StructureManager']

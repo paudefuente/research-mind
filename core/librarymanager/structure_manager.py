@@ -33,7 +33,9 @@ class StructureManager:
         self.basic_structure = [
             'resmi_folders/json/def',
             'resmi_folders/json/def-processed',
-            'resmi_folders/json/trial-searches/que-gen-combinations',
+            'resmi_folders/json/trial-searches/que-gen-combinations/imp1',
+            'resmi_folders/json/trial-searches/que-gen-combinations/imp2',
+            'resmi_folders/json/trial-searches/que-gen-combinations/imp3',
             'resmi_folders/json/trial-searches/que-results/imp1',
             'resmi_folders/json/trial-searches/que-results/imp2',
             'resmi_folders/json/trial-searches/que-results/imp3',
@@ -140,3 +142,4 @@ class StructureManager:
         
         total_files = sum(1 for _ in project_path.iterdir() if _.is_file())
         return total_files
+    

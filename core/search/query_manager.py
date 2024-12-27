@@ -1,6 +1,7 @@
 """
-This script will create request to a LM Studio API to get search queries based on key-terms passed 
-as arguments. 
+QueryGenerator class contains different methods to generate search queries based on 
+key-terms, key-concepts, etc. These queries will be used for different purposes, such
+as trial searches, scrapper services, etc.
 
 authors = [
     "@paudefuente",
@@ -38,10 +39,10 @@ class QueryGenerator:
         logging.basicConfig(level=logging.INFO)     
         self.log = logging.getLogger(__name__)
 
-        self.LIBRARY_FOLDER_PATH = Path(StructureManager.ROOT_PATH)
+        self.LIBRARY_FOLDER_PATH = Path(StructureManager.ROOT_PATH).joinpath("resmi_folders/json")
 
     # Getter methods
-    def get_concepts(self, file_path: str) -> pd.Series:
+    def get_concepts(self, file_path: Path | str) -> pd.Series:
         """
         Gets the context provided to init the model and understand the field of the search.
 
@@ -49,7 +50,10 @@ class QueryGenerator:
         :return: The context of the search.
         """
         if not os.path.exists(file_path) or not file_path:
-            file_path = self.LIBRARY_FOLDER_PATH.joinpath("def/key-concepts.json")
+            file_path = self.LIBRARY_FOLDER_PATH.joinpath("def/key_concepts.json")
+
+        if isinstance(file_path, str):
+            file_path = Path(file_path)
 
         df = pd.DataFrame(pd.read_json(file_path))
         context = df["key-concepts"]
@@ -63,6 +67,12 @@ class QueryGenerator:
         :param keyterms_path: The path of the file that contains the keyterms.
         :return: list of keyterms (object and list)
         """
+        if not os.path.exists(file_path) or not file_path:
+            file_path = self.LIBRARY_FOLDER_PATH.joinpath("def/key_terms.json")
+
+        if isinstance(file_path, str):
+            file_path = Path(file_path)
+
         df = pd.DataFrame(pd.read_json(file_path))
         keyterms = df["keyterms"].copy()
 
@@ -73,7 +83,7 @@ class QueryGenerator:
         return keyterms, set(all_keyterms)
     
 
-    def get_separated_keyterms_by_importance(self, file_path: str) -> pd.Series:
+    def get_separated_keyterms_by_importance(self, file_path: Path | str) -> pd.Series:
         """
         Gets all the separated keyterms according to their importance from a JSON
         file.
@@ -81,6 +91,12 @@ class QueryGenerator:
         :param file_path: The path of the file that contains the separated keyterms.
         :return: The separated keyterms. 
         """
+        if not os.path.exists(file_path) or not file_path:
+            file_path = self.LIBRARY_FOLDER_PATH.joinpath("def-processed/separated_keyterms.json")
+
+        if isinstance(file_path, str):
+            file_path = Path(file_path)
+
         df = pd.DataFrame(pd.read_json(file_path))
         separated_keyterms = df["data"].copy()
         return separated_keyterms
@@ -93,11 +109,15 @@ class QueryGenerator:
         :param keyterms: The keyterms of the search.
         :param importance: The importance of the keyterms.
         """
+
+        if isinstance(file_path, str):
+            file_path = Path(file_path)
+
         keyt = pd.DataFrame(keyterms.tolist().copy())
         return keyt[keyt["importance"] == importance]
 
 
-    def get_thesaurus(self, file_path: any) -> tuple[pd.Series, set[str]]:
+    def get_thesaurus(self, file_path: Path | str) -> tuple[pd.Series, set[str]]:
         """
         Gets all the thesaurus defined in the keyterms and stored in the specific
         file.
@@ -105,6 +125,12 @@ class QueryGenerator:
         :param file_path: The path of the file that contains the thesaurus.
         :return: The thesaurus of the search + all the thesaurus terms.
         """
+        if not os.path.exists(file_path) or not file_path:
+            file_path = self.LIBRARY_FOLDER_PATH.joinpath("def/thesaurus.json")
+
+        if isinstance(file_path, str):
+            file_path = Path(file_path)
+        
         df = pd.DataFrame(pd.read_json(file_path))
         thesaurus = df["data"].copy()
 
@@ -135,12 +161,34 @@ class QueryGenerator:
         :param file_path: The path of the file that contains the sources.
         :return: The sources of the studies.
         """
+        if not os.path.exists(file_path) or not file_path:
+            file_path = self.LIBRARY_FOLDER_PATH.joinpath("def/sources_information.json")
+
         if isinstance(file_path, str):
             file_path = Path(file_path)
         
         df = pd.DataFrame(pd.read_json(file_path))
         sources = df["sources"].copy()
         return sources
+    
+
+    def get_rules(self, file_path: Path | str) -> pd.Series:
+        """
+        Gets all the rules defined for each of the sources of information included
+        in the search.
+        
+        :param file_path: The path of the file that contains the rules.
+        :return: The rules of the sources of information.
+        """
+        if not os.path.exists(file_path) or not file_path:
+            file_path = self.LIBRARY_FOLDER_PATH.joinpath("def/search_rules.json")
+
+        if isinstance(file_path, str):
+            file_path = Path(file_path)
+
+        df = pd.DataFrame(pd.read_json(file_path))
+        rules = df["rules_search"].copy()
+        return rules
     
 
     def get_source_rules(self, information_source: pd.Series, source_name: str) -> set[str]:
@@ -157,22 +205,6 @@ class QueryGenerator:
                 source_rules.update(source["rules"])
                 break
         return source_rules
-    
-
-    def get_rules(self, file_path: Path | str) -> pd.Series:
-        """
-        Gets all the rules defined for each of the sources of information included
-        in the search.
-        
-        :param file_path: The path of the file that contains the rules.
-        :return: The rules of the sources of information.
-        """
-        if isinstance(file_path, str):
-            file_path = Path(file_path)
-
-        df = pd.DataFrame(pd.read_json(file_path))
-        rules = df["rules_search"].copy()
-        return rules
     
 
     # Creation Methods
@@ -229,7 +261,7 @@ class QueryGenerator:
                 basic_structure["data"].append(new_concept)
 
             # Create or overwriter JSON file
-            path_file = Path(QueryGenerator.LIBRARY_FOLDER_PATH).joinpath("/separated_keyterms.json")
+            path_file = Path(QueryGenerator.LIBRARY_FOLDER_PATH).joinpath("def-processed/separated_keyterms.json")
             with open(path_file, "w") as file:
                 json.dump(basic_structure, file, indent=4)
 
@@ -303,7 +335,7 @@ class QueryGenerator:
             }
             basic_structure["data"].append(new_thes)
 
-        path_file = Path(QueryGenerator.LIBRARY_FOLDER_PATH).joinpath("/thesaurus.json")
+        path_file = Path(QueryGenerator.LIBRARY_FOLDER_PATH).joinpath("def/thesaurus.json")
         with open(path_file, "w") as file:
             json.dump(basic_structure, file, indent=4)
 
@@ -354,13 +386,13 @@ class QueryGenerator:
             total_query_files = len(os.listdir(folder_path))
             for x in range(1, total_query_files + 1):
                 file_path = f"{folder_path}queries_{x}.json"
-                response = queryGenerator.add_terms_to_query_structure(file_path, separated_keyterms, thesaurus, x)
+                response = queryGenerator.generate_combinations(file_path, separated_keyterms, thesaurus, x)
                 if response:
                     queryGenerator.log.info(f"Queries have been generated and stored in {file_path}") 
                 else:
                     logging.error(f"An error occurred while generating the queries.")
-                    
-
+                    return False
+                
             return True
         except Exception as e:
             logging.error(f"An error occurred while generating the search queries: {e}")
@@ -491,7 +523,7 @@ class QueryGenerator:
 
     # META PROGRAMMING - Interesting to use in the future (create a function which changes
     # its own behavior and structure based on the arguments passed)
-    def add_terms_to_query_structure(self, file_path: any, separated_keyterms: pd.Series, 
+    def generate_combinations(self, file_path: any, separated_keyterms: pd.Series, 
                                      thesaurus: pd.Series, importance: int) -> bool:
         """
         Adds the terms to the query structure. This function will replace the 
@@ -515,13 +547,12 @@ class QueryGenerator:
             match importance:
 
                 case "1":
-                    
                     # Extract all keyterms / concepts with same importance
                     imp1_all_key = separated_keyterms[separated_keyterms["importance"] == "1"]
                       
                     # Use of itertools.product to get all possible combinations
                     keyterms = imp1_all_key["keyterms"].tolist().copy()
-                    all_combinations = self.generate_combinations(list(keyterms))
+                    all_combinations = product(list(keyterms))
                     all_combinations = [list(x) for x in all_combinations]
            
                     all_combinations_copy = all_combinations.copy()
@@ -533,7 +564,6 @@ class QueryGenerator:
 
             
                 case "2":
-                    
                     # Extract all keyterms / concepts with same importance
                     imp1_all_key = separated_keyterms[separated_keyterms["importance"] == "1"]
                     imp2_all_key = separated_keyterms[separated_keyterms["importance"] == "2"]
@@ -543,7 +573,7 @@ class QueryGenerator:
                     keyterms1 = imp1_all_key["keyterms"].tolist().copy()
                     keyterms2 = imp2_all_key["keyterms"].tolist().copy()
                     all_keyterms = keyterms1 + keyterms2
-                    all_combinations = self.generate_combinations(list(all_keyterms))
+                    all_combinations = product(list(all_keyterms))
                     all_combinations = [list(x) for x in all_combinations]
 
                     all_combinations_copy = all_combinations.copy()
@@ -552,12 +582,10 @@ class QueryGenerator:
                     response = self.generate_combinations_thesaurus(file_path, all_combinations, all_combinations_copy,
                                                                     thesaurus, structure)
                     return response
-                
 
 
                 case "3":
-
-                     # Extract all keyterms / concepts with same importance
+                    # Extract all keyterms / concepts with same importance
                     imp1_all_key = separated_keyterms[separated_keyterms["importance"] == "1"]
                     imp2_all_key = separated_keyterms[separated_keyterms["importance"] == "2"]
                     imp3_all_key = separated_keyterms[separated_keyterms["importance"] == "3"]
@@ -568,7 +596,7 @@ class QueryGenerator:
                     keyterms2 = imp2_all_key["keyterms"].tolist().copy()
                     keyterms3 = imp3_all_key["keyterms"].tolist().copy()
                     all_keyterms = keyterms1 + keyterms2 + keyterms3
-                    all_combinations = self.generate_combinations(list(all_keyterms))
+                    all_combinations = product(list(all_keyterms))
                     all_combinations = [list(x) for x in all_combinations]
 
                     all_combinations_copy = all_combinations.copy()
@@ -582,7 +610,6 @@ class QueryGenerator:
                 case _: 
                     self.log.error("The importance is not valid.")
                     return False
-            
         except Exception as e:
             self.log.error(f"An error occurred while adding the terms to the query structure: {e}")
             return False
@@ -611,7 +638,7 @@ class QueryGenerator:
                         thes = self.get_thesaurus_from_keyterm(keyterm, thesaurus) 
                         items = list(items)
                         transformed_items[i] = thes if thes else item
-                        combinations.extend(self.generate_combinations(transformed_items))
+                        combinations.extend(product(transformed_items))
                         continue
                     
                     # Separate the keyterm
@@ -628,18 +655,40 @@ class QueryGenerator:
                             thes.append(self.get_thesaurus_from_keyterm(kt, thesaurus))
 
                         # All possible combinations of the thesaurus of one keyterm
-                        thes = list(self.generate_combinations(thes))
+                        thes = list(product(thes))
                         thes = [" ".join(x) for x in thes]
 
                         items = list(items)
                         transformed_items[i] = thes 
-                        combinations.extend(self.generate_combinations(transformed_items)) # Check if it is correct 
+                        combinations.extend(product(*transformed_items)) # Check if it is correct 
 
                 if combinations:
                     self.log.info(f"Combinations: {combinations}")
                     for x in combinations:
                         all_combinations.insert(len(all_combinations) + 1, x)
 
+            # Add the terms to the query structure
+            queries = self.add_terms_to_query_structure(all_combinations, structure)
+
+            response = self.store_queries(queries, file_path)
+            if response:
+                self.log.info(f"Queries have been stored in {file_path}")
+                return True
+        except Exception as e:
+            self.log.error(f"An error occurred while generating the thesaurus combinations: {e}")
+            return False
+        
+
+    def add_terms_to_query_structure(self, all_combinations: any, structure: str) -> list:
+        """
+        Add terms to the query structure. This function will replace the generic 
+        terms in the structure (concept1_1, concept2_1, etc) with the actual terms.
+
+        :param all_combinations: A list of list with all the combinations created.
+        :param structure: The structure of the queries.
+        :return: True if the terms have been added successfully, False otherwise.
+        """
+        try:
             # Remove duplicates 
             unique_combinations = sorted(set(tuple(x) for x in all_combinations))
             unique_combinations = [list(x) for x in unique_combinations]
@@ -647,7 +696,6 @@ class QueryGenerator:
             self.log.info(f"Unique combinations: {unique_combinations}")
             self.log.info(f"Structure: {structure}")
 
-             # Replace generic terms with actual terms - Error here
             formatted_combinations = []
             for items in unique_combinations:
                 temp = structure
@@ -656,33 +704,35 @@ class QueryGenerator:
                     temp = temp.replace(f"concept_{i+1}", item)
                 formatted_combinations.append(temp)
 
+            return formatted_combinations
+        except Exception as e:
+            self.log.error(f"An error occurred while adding the terms to the query structure: {e}")
+            return []
+        
+    
+    def store_queries(self, queries: list, file_path: Path | str) -> bool:
+        """
+        Store the queries in a JSON file. 
+
+        :param queries: The queries to store.
+        :param file_path: The path of the file to store the queries.
+        :return: True if the queries have been stored successfully, False otherwise.
+        """
+        try:
             # Store the combinations in the JSON file
             with open(file_path, "r") as file:
                 data = json.load(file)
 
             data["data"] = []
-            data["data"].extend(formatted_combinations)
+            data["data"].extend(queries)
 
             with open(file_path, "w") as file:
                 json.dump(data, file, indent=4)
 
             return True
         except Exception as e:
-            self.log.error(f"An error occurred while generating the thesaurus combinations: {e}")
-            return False
-        
-
-    ## Refactor this function to use the itertools.product ##   
-    def generate_combinations(self, keyterms: any) -> any:
-        """
-        Generates all possible combinations of the keyterms.
-        
-        :param keyterms: The keyterms to generate the combinations.
-        :return: All possible combinations of the keyterms.
-        """
-        combinations = product(*keyterms)
-        return combinations
-
+            self.log.error(f"An error occurred while storing the queries: {e}")
+            return False 
 
 
 

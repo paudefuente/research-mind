@@ -89,7 +89,6 @@ class ScrapperService:
         :param target_pth: The path of the folder where the results will be stored.
         :return: True if the queries are defined correctly
         """
-        
         if not isinstance(origin_path, Path):
             origin_path = Path(origin_path)
 
@@ -145,12 +144,6 @@ class ScrapperService:
         except Exception as e:
             self.log.error(f"Error: {e}")
             return []
-
-
-
-
-
-
 
 
 if __name__ == "__main__":

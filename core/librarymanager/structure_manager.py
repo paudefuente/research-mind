@@ -143,3 +143,7 @@ class StructureManager:
         total_files = sum(1 for _ in project_path.iterdir() if _.is_file())
         return total_files
     
+
+# if __name__ == "__main__":
+#     structureManager = StructureManager()
+#     structureManager.generate_structure()

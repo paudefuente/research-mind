@@ -16,6 +16,7 @@ packages = [
 
 [tool.poetry.scripts]
 mycli = "resmind.core.cli:welcome"
+init_resmind = "resmind.core.librarymanager.structure_manager:generate_structure"
 
 [tool.poetry.dependencies]
 python = ">=3.11"
